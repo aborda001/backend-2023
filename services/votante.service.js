@@ -151,7 +151,7 @@ class VotanteService {
       where: { us: true, voto: true },
     });
 
-    const efectividad = (votantes_us * 100) / votantes;
+    const efectividad = (votantes_us * 100) / votantes || 0;
 
     return { votantes, mesas, efectividad, votantes_us };
   }

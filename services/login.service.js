@@ -32,7 +32,7 @@ class LoginService {
     delete usertosend.password;
 
     const token = jwt.sign({ usertosend }, config.jwtSecret, {
-      expiresIn: 86400000,
+      expiresIn: 86400,
     });
     return {
       ...usertosend,

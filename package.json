@@ -9,8 +9,7 @@
     "start:dev": "nodemon index.js",
     "migration:generate": "sequelize-cli migration:generate --name",
     "migration:run": "sequelize-cli db:migrate",
-    "upload": "node data/index.js",
-    "upload:test": "nodemon data/index.js"
+    "upload": "node data/index.js"
   },
   "author": "Arnaldo Borda (aborda001@gmail.com)",
   "license": "ISC",

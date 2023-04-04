@@ -37,7 +37,7 @@ const VotanteSchema = {
     allowNull: true,
     type: DataTypes.STRING,
   },
-  order: {
+  orden: {
     allowNull: true,
     type: DataTypes.STRING,
   },
