@@ -12,6 +12,11 @@ conn = psycopg2.connect(
 
 cursor = conn.cursor()
 
+query = "INSERT INTO departamentos (name) VALUES ('MISIONES1')"
+
+cursor.execute(query)
+conn.commit()
+
 
 def scanVotantes(path, ciudad_id, local_id):
     with open(path) as json_file:

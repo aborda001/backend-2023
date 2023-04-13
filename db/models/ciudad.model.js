@@ -34,7 +34,7 @@ class Ciudad extends Model {
       as: 'locales',
     });
     this.hasMany(models.Votante, {
-      foreignKey: 'local_id',
+      foreignKey: 'ciudad_id',
       as: 'votantes',
     });
   }

@@ -1,5 +1,5 @@
 const { models } = require('../libs/sequelize');
-const { Op, literal, fn } = require('sequelize');
+const { Op, literal, fn, where } = require('sequelize');
 
 class VotanteService {
   constructor() {}
@@ -151,7 +151,9 @@ class VotanteService {
       where: { us: true, voto: true },
     });
 
-    const efectividad = (votantes_us * 100) / votantes || 0;
+    const efectividad = (
+      votantes > 0 ? (votantes_us * 100) / votantes : 0
+    ).toFixed();
 
     return { votantes, mesas, efectividad, votantes_us };
   }
@@ -162,21 +164,19 @@ class VotanteService {
         {
           model: models.Votante,
           as: 'votantes',
-          attributes: [
-            ['voto', 'voto'],
-            ['us', 'us'],
-          ],
         },
       ],
     };
-    const votantes = await models.Ciudad.findAll(options);
+    const ciudades = await models.Ciudad.findAll(options);
     const response = [];
-    votantes.forEach((ciudad) => {
-      const votantes = ciudad.votantes.length;
+    ciudades.forEach((ciudad) => {
+      const votantes = ciudad.votantes.filter((votante) => votante.voto).length;
       const votantes_us = ciudad.votantes.filter(
-        (votante) => votante.us
+        (votante) => votante.us && votante.voto
       ).length;
-      const efectividad = (votantes_us * 100) / votantes;
+      const efectividad = (
+        votantes > 0 ? (votantes_us * 100) / votantes : 0
+      ).toFixed();
       response.push({
         ciudad: ciudad.name,
         votantes,
