@@ -187,6 +187,27 @@ class VotanteService {
 
     return response;
   }
+
+  async findAllMesaOrderByLocal(query, id) {
+    const options = {
+      attributes: ['orden', 'voto'],
+      where: {
+        mesa: query.mesa,
+        ciudad_id: query.ciudad,
+        local_id: id,
+      },
+    };
+
+    const local = await models.Local.findOne({
+      where: { id },
+      attributes: ['name'],
+    });
+
+    return {
+      local: local.name,
+      votantes: await models.Votante.findAll(options),
+    };
+  }
 }
 
 module.exports = VotanteService;

@@ -12,7 +12,7 @@ conn = psycopg2.connect(
 
 cursor = conn.cursor()
 
-query = "INSERT INTO departamentos (name) VALUES ('MISIONES1')"
+query = "INSERT INTO departamentos (name) VALUES ('MISIONES')"
 
 cursor.execute(query)
 conn.commit()

@@ -43,6 +43,25 @@ router.get(
     }
   }
 );
+router.get(
+  '/mesaorden/:id',
+  verifyToken,
+  checkRoles(['administrador', 'usuario']),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const { query } = req;
+      const votantes = await service.findAllMesaOrderByLocal(query, id);
+      res.status(200).json(votantes);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        message: 'Ocurrió un error, intente más tarde',
+        code: 500,
+      });
+    }
+  }
+);
 
 router.get(
   '/general/',
